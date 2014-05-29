@@ -1,0 +1,35 @@
+<div class="col-xs-12 col-sm-9" style="height:100%" height="100%">
+	<div class="page-header">
+		<ol class="breadcrumb">
+			<li>当前位置：</li>
+			<li>用户管理</li>
+			<li class="active">用户列表</li>
+		</ol>
+	</div>
+	<div class="table-responsive">
+		<table class="table table-bordered table-hover table-striped">
+		<thead>
+			<tr>
+				<th>编号</th>
+				<th>用户昵称</th>
+				<th>用户类型</th>
+				<th>注册日期</th>
+				<th>用户管理</th>
+			</tr>
+		</thead>
+		<tbody>			
+			{{range $index, $ele := .Users}}
+			<tr>
+				<td>{{$index}}</td>
+				<td>{{$ele.UserName}}</td>
+				<td>{{$ele.UserType}}</td>
+				<td>{{date $ele.RegTime "Y-m-d H:i:s"}}</td>
+				<td><a href="/admin/userDelete?id={{$ele.UserId}}&p={{$.p}}">删除</a></td>
+			</tr>
+			{{end}}
+			
+		</tbody>
+		</table>
+		{{template "admin/paginator.html" .}}
+	</div>
+</div>

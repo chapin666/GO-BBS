@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,scale=1.0">
+    <title>川信职院贴吧</title>
+    <link rel="shortcut icon" href="../static/img/favicon.png" />
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../static/css/index.css" rel="stylesheet" />
+	<script src="../static/js/jquery-1.10.1.min.js"></script>
+	<script src="../static/js/index.js"></script>
+    <!--HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries-->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="wrap">
+    
+    {{template "header.html" .}}
+
+    <section class="container pagelist-contents">
+        <div class="row row-offcanvas row-offcanvas-right">
+            <div class="col-xs-6 col-sm-3 sidebar-offcanvas" 
+                id="sidebar" role="navigation">
+                <div class="panel panel-default">
+                    <div class="panel-heading">贴吧分类</div>
+                    <div class="panel-body list-group">
+                        {{$id := .id}}
+                        {{range $kind := .kinds}}
+                        <a href="/page?id={{$kind.KindId}}" class="list-group-item {{if eq $id $kind.KindId}} active {{end}}">{{$kind.KindName}}</a>
+                        {{end}}
+                    </div>
+                </div>
+            </div><!--/.navgation-->
+            <div class="col-xs-12 col-sm-9">
+                <p class="pull-right visible-xs">
+                    <button type="button" class="btn btn-primary btn-xs"  data-toggle="offcanvas">Toggle nav</button>
+                </p>
+                <div class="row">
+                    <div>
+                        <ol class="breadcrumb">
+                            <li>当前位置：</li>
+                            <li><a href="/">主页</a></li>
+                            <li class="active">我的川信</li>
+                        </ol>
+                    </div>
+                    <div class="container">
+                        {{range $b := .bbs}}
+                        <div class="list-group">
+                            <a href="/list?id={{$b.BBSId}}" class="list-group-item">
+                                <span>发帖时间：{{date $b.AddTime "Y-m-d H:i:s"}}</span>
+                                <span class="label label-info">{{$b.AddAuthor.UserName}}</span>
+                                <span class="badge">回复数：{{$b.BBSId|ResCount}}</span>
+                                <br /><br />
+                                <h4 class="list-group-item-heading page-header">
+                                    标题<br /><br />
+                                    {{$b.BBSTitle}}
+                                </h4>
+                                <p class="list-group-item-text">
+                                    <h4>内容</h4>
+                                    {{str2html $b.BBSContent}}
+                                </p>
+                            </a>
+                        </div>
+                        {{end}}
+
+                       {{template "admin/paginator.html" .}}
+                    </div> <!--/container-->
+                </div><!--/.row-->
+            </div><!--/contents-->
+        <div> <!--/ row-->
+    </section>
+</div><!--/.wrap-->
+
+<footer id="footer">
+    <div class="container">
+        <p class="text-muted">&copy; Dowish.net　2014</p>
+    </div>
+</footer>
+
+<!--go top -->
+<div class="go-top">
+    <div class="arrow"></div>
+    <div class="stick"></div>
+</div><!--/.go top-->
+
+{{template "footer.html" .}}
+
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="../static/js/offcanvas.js"></script>
+</html>

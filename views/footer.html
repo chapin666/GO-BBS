@@ -1,0 +1,45 @@
+<!-- login Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+aria-labelledby="myModalLabel" aria-hidden="true"  show="true">
+    <div class="modal-dialog">
+        <form action="/login" role="form" class="form-horizontal" method="post">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" 
+                aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">用户登录</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="userName" class="col-sm-2 control-label">
+                        用户名：
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="userName"
+                         name="userName"   placeholder="请输入用户名" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-2 control-label">
+                    密&nbsp;&nbsp;&nbsp;码：
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="password" 
+                        name="password" placeholder="请输入密码" required>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                {{if .status}}
+				{{if eq .status 1}}
+				<span class="text-danger" style="margin-right:30px">用户名或者密码错误</span>
+				{{end}}
+                {{end}}
+                <button type="submit" class="btn btn-primary">登录</button>
+                <button type="button" class="btn btn-default" 
+                data-dismiss="modal">取消</button>
+            </div>
+        </div><!-- /.modal-content -->
+        </form>
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

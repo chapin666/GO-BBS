@@ -1,0 +1,34 @@
+<div class="col-xs-12 col-sm-9" style="height:100%" height="100%">
+	<div class="page-header">
+		<ol class="breadcrumb">
+			<li>当前位置：</li>
+			<li>帖子管理</li>
+			<li class="active">分类列表</li>
+		</ol>
+	</div>
+	<div class="table-responsive">
+		<table class="table table-bordered table-hover table-striped">
+		<thead>
+			<tr>
+				<th>编号</th>
+				<th>帖子类型</th>
+				<th>帖子数</th>
+				<th>创建日期</th>
+				<th>管理</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{ range  $index, $ele := .kinds}}
+			<tr>
+				<td>{{$index}}</td>
+				<td>{{$ele.KindName}}</td>
+				<td>{{$ele.KindId | Count}}</td>
+				<td>{{date $ele.AddTime "Y-m-d H:i:s"}}</td>
+				<td><a href="/admin/kindsDel?id={{$ele.KindId}}">删除</a></td>
+			</tr>
+			{{end}}
+		</tbody>
+		</table>
+		{{template "admin/paginator.html" .}}
+	</div>
+</div>

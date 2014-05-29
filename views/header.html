@@ -1,0 +1,40 @@
+  <header id="navbar" class="navbar navbar-default navbar-fixed-top" role="navgation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">
+                <img src="../static/img/favicon.png" alt="" width="18px">
+                <strong>川信职院贴吧</strong>
+            </a>
+        </div><!--/.nav-header-->
+        <div class="collapse navbar-collapse">
+            <ul id="nav-right" class="nav navbar-nav navbar-right">
+				{{if or (eq .info 0) (eq .info 2)}}
+                <li><a href="###" data-toggle="modal" data-target="#myModal">【用户登录】</a></li>
+                <li><a href="/register" target="_self">【用户注册】</a></li>
+				{{else}}
+                <li class="btn-group" style="padding-top:9px">
+                    <button type="button" class="btn btn-default btn-sm">
+                        亲爱的{{.user.UserName}}
+                    </button>
+                    <button type="button" 
+                    class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="/admin/userInfo">个人中心</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/admin/logout">注销登录</a></li>
+                    </ul>
+                </li>
+				{{end}}
+            </ul>
+        </div><!--/.nav-right-->
+    </div>
+</header><!--/.header-->
